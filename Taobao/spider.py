@@ -5,15 +5,15 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from pyquery import PyQuery as pq
-from config import *
+# from config import *
 import pymongo
 
 MONGO_URL = 'localhost'
 MONGO_DB = 'taobao'
 MONGO_TABLE = 'product'
 
-KEYWORD = '美食'
-client = pymongo.MongoClient(MONGO_URL)
+KEYWORD = 'Python'
+client = pymongo.MongoClient(MONGO_URL)    # 创建一个连接对象
 db = client[MONGO_DB]
 # browser = webdriver.Chrome()
 
@@ -82,9 +82,9 @@ def save_to_mongo(result):
 def main():
     try:
         total = search()
-        total = int(re.compile('(\d+)').search(total).group(1))
+        total = int(re.compile('(\d+)').search(total).group(1))   # 通过正则表达式提取页面的总页数
         # print(total)
-        for i in range(2, total+1):
+        for i in range(2, total+1):   # 遍历所有页面
             next_page(i)
     except Exception:
         print("出错啦")
